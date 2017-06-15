@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.online.rental.car.model.ValidationError;
 import com.online.rental.car.model.ValidationErrorBuilder;
-
-@ControllerAdvice(basePackages = {"com.rental.car.controller"} )
+/**
+ * To handle any exception or error that will be occured in application.
+ * @author aje
+ *
+ */
+@ControllerAdvice(basePackages = {"com.online.rental.car"} )
 public class AppErrorHandlerController {
 	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ExceptionHandler(value = {Exception.class,MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
 	public ValidationError handleException(MethodArgumentNotValidException exception) {
