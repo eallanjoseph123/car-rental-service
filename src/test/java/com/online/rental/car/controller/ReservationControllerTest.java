@@ -1,5 +1,8 @@
 package com.online.rental.car.controller;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +32,9 @@ import com.online.rental.car.dao.ReservationDao;
 import com.online.rental.car.model.Car;
 import com.online.rental.car.model.Reservation;
 import com.online.rental.car.service.ReservationService;
+import com.online.rental.car.util.CarStatuType;
 
 @RunWith(MockitoJUnitRunner.class)
-// @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationConfig.class)
 @WebAppConfiguration
 public class ReservationControllerTest {
@@ -50,17 +53,58 @@ public class ReservationControllerTest {
 	
 	@Mock
 	private ReservationDao reservationDao;
-
+	
+	private Reservation r ;
+	
+	private Reservation r2 ;
+	
+	private Car car;
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(reservationController)
 				.setMessageConverters(new MappingJackson2HttpMessageConverter())
 				.setControllerAdvice(new AppErrorHandlerController()).build();
-
+		
+		r = new Reservation();
+		r.setAgeOfDriver(25);
+		r.setDriverLicenNumber("driver123");
+		car = new Car();
+		car.setBrand("jeep");
+		car.setNumSittingCapacity(5);
+		car.setManual(false);
+		car.setOtherInfo("fast car :)");
+		car.setColor("blue");
+		car.setPlateNumber("A-112");
+		car.setId(32L);
+		car.setStatus(CarStatuType.AVAILABLE.toString());
+		r.setCar(car);
+		r.setPickUpDate("11-06-2016");
+		r.setReturnDate("11-07-2016");
+		r.setTotalPrice("20.00");
+		r.setId(11L);
+		
+		r2 = new Reservation();
+		r.setAgeOfDriver(25);
+		r.setDriverLicenNumber("driver123");
+		Car car2 = new Car();
+		car2.setBrand("jeep");
+		car2.setNumSittingCapacity(5);
+		car2.setManual(false);
+		car2.setOtherInfo("fast car :)");
+		car2.setColor("blue");
+		car2.setPlateNumber("A-112");
+		car2.setId(33L);
+		r2.setCar(car);
+		r2.setPickUpDate("11-06-2016");
+		r2.setReturnDate("11-07-2016");
+		r2.setTotalPrice("20.00");
+		r2.setId(12L);
 	}
 	
 	@Test
-	public void updateCarStatus(){
+	public void updateCarStatus() throws Exception{
+		String url = ROOT_MAP+"/update/car/"+11+"/"+1;
+		
 		Car car2 = new Car();
 		car2.setBrand("jeep");
 		car2.setNumSittingCapacity(5);
@@ -70,47 +114,20 @@ public class ReservationControllerTest {
 		car2.setPlateNumber("A-112");
 		car2.setPerDayPrice("10.00");
 		car2.setId(33L);
-		car2.setStatus("RENT");
-		Mockito.when(reservationService.updateCarStatus(Mockito.anyLong())).thenReturn(car2);
+		car2.setStatus(CarStatuType.RENT.toString());
 		
+		Mockito.when(reservationService.updateCarStatus(11L,CarStatuType.RENT)).thenReturn(car2);
 		
-		Car car = new Car();
-		car.setBrand("jeep");
-		car.setNumSittingCapacity(5);
-		car.setManual(false);
-		car.setOtherInfo("fast car :)");
-		car.setColor("blue");
-		car.setPlateNumber("A-112");
-		car.setPerDayPrice("10.00");
-		car.setStatus("AVAILABLE");
-		car2.setId(32L);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.put(url);
+		ResultActions results = mockMvc.perform(getRequest);
 		
-		Reservation r = new Reservation();
-		r.setAgeOfDriver(25);
-		r.setDriverLicenNumber("driver123");
-		r.setCar(car);
-		r.setPickUpDate("11-06-2016");
-		r.setReturnDate("11-07-2016");
-		r.setTotalPrice("20.00");
-		r.setId(100);
-		Mockito.when(reservationDao.findOne(Mockito.anyLong())).thenReturn(r);
+		results.andDo(MockMvcResultHandlers.print());
+		results.andExpect(MockMvcResultMatchers.jsonPath("$.brand").exists());
+		results.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 		
+		Car car3 = reservationService.updateCarStatus(11L,CarStatuType.RENT);
 		
-		
-		
-		
-		Long reservationId = 100L;
-		Reservation r2 = reservationDao.findOne(reservationId);
-		
-		Car c3 = r2.getCar();
-		String anotherString = "AVAILABLE";
-		
-		Assert.assertTrue(c3.getStatus().equalsIgnoreCase(anotherString));
-		
-		Car c2 = reservationService.updateCarStatus(reservationId);
-		
-		Assert.assertFalse(c3.getStatus().equalsIgnoreCase(c2.getStatus()));
-		
+		Assert.assertFalse(car.getStatus().equalsIgnoreCase(car3.getStatus()));
 	}
 
 	@Test
@@ -118,24 +135,6 @@ public class ReservationControllerTest {
 		String url = ROOT_MAP+"/addReservation";
 		
 		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
-		
-		Reservation r = new Reservation();
-		r.setAgeOfDriver(25);
-		r.setDriverLicenNumber("driver123");
-		Car car = new Car();
-		car.setBrand("jeep");
-		car.setNumSittingCapacity(5);
-		car.setManual(false);
-		car.setOtherInfo("fast car :)");
-		car.setColor("blue");
-		car.setPlateNumber("A-112");
-		car.setId(32L);
-		r.setCar(car);
-		r.setPickUpDate("11-06-2016");
-		r.setReturnDate("11-07-2016");
-		r.setTotalPrice("20.00");
-		r.setId(11L);
-	
 		Mockito.when(reservationService.save(Mockito.any(Reservation.class))).thenReturn(r);
 		
 		
@@ -148,5 +147,37 @@ public class ReservationControllerTest {
 		results.andDo(MockMvcResultHandlers.print());
 		results.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 	
+	}
+	
+	@Test
+	public void showAllReservationTest() throws Exception{
+		String url = ROOT_MAP+"/viewAllReservation";
+		
+		List<Reservation> value = new ArrayList<Reservation>();
+		value.add(r);
+		value.add(r2);
+		Mockito.when(reservationService.getAll()).thenReturn(value);
+		
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
+		ResultActions results = mockMvc.perform(getRequest);
+		results.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+		results.andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));
+		results.andExpect(status().is2xxSuccessful());	
+		results.andDo(MockMvcResultHandlers.print());
+		
+		Mockito.verify(reservationService,Mockito.atLeast(1)).getAll();
+	}
+	
+	
+	@Test
+	public void removeTest() throws Exception{
+		String url = ROOT_MAP+"/delete/"+r.getId();
+		Mockito.when(reservationService.delete(r.getId())).thenReturn(r);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.delete(url);
+		
+		ResultActions results = mockMvc.perform(getRequest);
+		
+		results.andExpect(status().is2xxSuccessful());	
+		results.andDo(MockMvcResultHandlers.print());
 	}
 }

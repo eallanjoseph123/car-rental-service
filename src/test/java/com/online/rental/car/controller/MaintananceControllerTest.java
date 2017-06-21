@@ -71,6 +71,7 @@ public class MaintananceControllerTest {
 		car.setPlateNumber("A-112");
 		car.setPerDayPrice("10.00");
 		car.setStatus("AVAILABLE");
+		car.setType("vios");
 		car.setId(33L);
 		
 		Mockito.when(maintananceService.save(Mockito.any(Car.class))).thenReturn(car);
@@ -108,6 +109,7 @@ public class MaintananceControllerTest {
 		car.setPlateNumber("A-112");
 		car.setPerDayPrice("10.00");
 		car.setStatus("RENT");
+		car.setType("vios");
 		car.setId(22L);
 		
 		Mockito.when(maintananceService.update(Mockito.any(Car.class))).thenReturn(car);

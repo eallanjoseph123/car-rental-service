@@ -1,9 +1,12 @@
 package com.online.rental.car.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,8 +15,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Car", schema = "rental")
-public class Car {
+public class Car implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
     @GeneratedValue
     @Column(name = "car_id")
@@ -22,6 +27,10 @@ public class Car {
 	@NotBlank(message = "must not be blank")
 	@Column(name = "brand")
 	private String brand;
+	
+	@NotBlank(message = "must not be blank")
+	@Column(name = "type")
+	private String type;
 	
 	@NotBlank(message = "must not be blank")
 	@Column(name = "color")
@@ -50,6 +59,10 @@ public class Car {
 	@NotBlank(message = "must not be blank")
 	@Column(name = "status")
 	private String status;
+	
+	@Lob
+	@Column(name="car_image")
+	private byte[] image;
 
 	public Car(){
 		
@@ -147,7 +160,20 @@ public class Car {
 	public void setOtherInfo(String otherInfo) {
 		this.otherInfo = otherInfo;
 	}
-	
-	
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 }

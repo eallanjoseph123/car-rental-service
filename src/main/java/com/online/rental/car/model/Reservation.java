@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "reservation", schema = "rental")
 public class Reservation {
 	
+	
 	@Id
     @GeneratedValue
     @Column(name = "RESERVE_ID")
@@ -43,11 +44,18 @@ public class Reservation {
     @Column(name = "ageOfDriver")
 	private int ageOfDriver;
     
+    /**
+     * Computation of this price will be on frontEnd using angularJS
+     * 
+     * Formula
+     * Days * carPrice
+     */
     @NotBlank(message = "must not be blank")
     @Column(name = "totalPrice")
     private String totalPrice;
     
-    
+    @Column(name = "reserveNumber", unique = true)
+    private String reserveNumber;
     
 	public long getId() {
 		return id;
@@ -55,6 +63,14 @@ public class Reservation {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getReserveNumber() {
+		return reserveNumber;
+	}
+
+	public void setReserveNumber(String reserveNumber) {
+		this.reserveNumber = reserveNumber;
 	}
 
 	public String getTotalPrice() {
@@ -109,11 +125,4 @@ public class Reservation {
 		this.id = id;
 	}
 
-	
-
-	
-	
-	
-
-	
 }

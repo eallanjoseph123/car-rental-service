@@ -1,0 +1,22 @@
+[{"id":1,
+	"brand":"toyota",
+	"color":null,
+	"type":'vios',
+	"numSittingCapacity":5,
+	"otherInfo":"nice",
+	"plateNumber":null,
+	"perDayPrice":50,
+	"status":null,
+	"manual":true},
+	{
+	"id":3,
+	"brand":"honda",
+	"color":null,
+	"type":'civic',
+	"numSittingCapacity":4,
+	"otherInfo":"good",
+	"plateNumber":null,
+	"perDayPrice":60,
+	"status":null,
+	"manual":false}
+	]

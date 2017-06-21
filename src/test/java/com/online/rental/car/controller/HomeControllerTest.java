@@ -33,12 +33,11 @@ import com.online.rental.car.model.HomeView;
 import com.online.rental.car.service.HomeService;
 
 @RunWith(MockitoJUnitRunner.class)
-//@RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationConfig.class)
 @WebAppConfiguration
 public class HomeControllerTest {
 	
-	private MockMvc mockMvc;
+	private static final String ROOT_MAP = "/home";
 	
 	@Mock
 	private HomeService<HomeView> homeService;
@@ -46,6 +45,7 @@ public class HomeControllerTest {
 	@InjectMocks
 	private HomeController homeController;
 	
+	private MockMvc mockMvc;
 	
 	
 	@Before
@@ -89,7 +89,8 @@ public class HomeControllerTest {
 	
 	@Test
 	public void showAvailableCarsTest() throws Exception{
-		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get("/showAvailableCars");
+		String url = ROOT_MAP+"/showAvailableCars";
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get(url);
 		getRequest.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		
 		ResultActions results = mockMvc.perform(getRequest);
