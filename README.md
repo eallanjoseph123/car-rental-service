@@ -8,6 +8,8 @@ Front End
 1.AngularJs 1.X version
 2.Bootsrap
 3.RequireJs (Future Implementation)
+4. Javascript
+5. HTML & CSS
 
 Testing:
 1. Junit & Mockito
