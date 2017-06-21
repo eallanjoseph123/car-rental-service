@@ -3,8 +3,8 @@
 Some user stories (functionalities) are still working. 
 
 Label 
-* - currently working
-# - done
+(*)  = currently working
+(#) = done
 =================================================
 
 Info: 
