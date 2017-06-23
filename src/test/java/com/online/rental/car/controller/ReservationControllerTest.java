@@ -54,9 +54,9 @@ public class ReservationControllerTest {
 	@Mock
 	private ReservationDao reservationDao;
 	
-	private Reservation r ;
+	private Reservation reservation ;
 	
-	private Reservation r2 ;
+	private Reservation reservation2 ;
 	
 	private Car car;
 	@Before
@@ -65,9 +65,9 @@ public class ReservationControllerTest {
 				.setMessageConverters(new MappingJackson2HttpMessageConverter())
 				.setControllerAdvice(new AppErrorHandlerController()).build();
 		
-		r = new Reservation();
-		r.setAgeOfDriver(25);
-		r.setDriverLicenNumber("driver123");
+		reservation = new Reservation();
+		reservation.setAgeOfDriver(25);
+		reservation.setDriverLicenNumber("driver123");
 		car = new Car();
 		car.setBrand("jeep");
 		car.setNumSittingCapacity(5);
@@ -77,15 +77,16 @@ public class ReservationControllerTest {
 		car.setPlateNumber("A-112");
 		car.setId(32L);
 		car.setStatus(CarStatuType.AVAILABLE.toString());
-		r.setCar(car);
-		r.setPickUpDate("11-06-2016");
-		r.setReturnDate("11-07-2016");
-		r.setTotalPrice("20.00");
-		r.setId(11L);
+		reservation.setCar(car);
+		reservation.setPickUpDate("11-06-2016");
+		reservation.setReturnDate("11-07-2016");
+		reservation.setTotalPrice("20.00");
+		reservation.setId(11L);
+		reservation.setEmail("email@yahoo.com");
 		
-		r2 = new Reservation();
-		r.setAgeOfDriver(25);
-		r.setDriverLicenNumber("driver123");
+		reservation2 = new Reservation();
+		reservation.setAgeOfDriver(25);
+		reservation.setDriverLicenNumber("driver123");
 		Car car2 = new Car();
 		car2.setBrand("jeep");
 		car2.setNumSittingCapacity(5);
@@ -94,11 +95,11 @@ public class ReservationControllerTest {
 		car2.setColor("blue");
 		car2.setPlateNumber("A-112");
 		car2.setId(33L);
-		r2.setCar(car);
-		r2.setPickUpDate("11-06-2016");
-		r2.setReturnDate("11-07-2016");
-		r2.setTotalPrice("20.00");
-		r2.setId(12L);
+		reservation2.setCar(car);
+		reservation2.setPickUpDate("11-06-2016");
+		reservation2.setReturnDate("11-07-2016");
+		reservation2.setTotalPrice("20.00");
+		reservation2.setId(12L);
 	}
 	
 	@Test
@@ -135,10 +136,10 @@ public class ReservationControllerTest {
 		String url = ROOT_MAP+"/addReservation";
 		
 		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
-		Mockito.when(reservationService.save(Mockito.any(Reservation.class))).thenReturn(r);
+		Mockito.when(reservationService.save(Mockito.any(Reservation.class))).thenReturn(reservation);
 		
 		
-		String jsonReserve = utilGson.toJson(r);
+		String jsonReserve = utilGson.toJson(reservation);
 		
 		getRequest.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		getRequest.content(jsonReserve);
@@ -154,8 +155,8 @@ public class ReservationControllerTest {
 		String url = ROOT_MAP+"/viewAllReservation";
 		
 		List<Reservation> value = new ArrayList<Reservation>();
-		value.add(r);
-		value.add(r2);
+		value.add(reservation);
+		value.add(reservation2);
 		Mockito.when(reservationService.getAll()).thenReturn(value);
 		
 		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
@@ -171,8 +172,8 @@ public class ReservationControllerTest {
 	
 	@Test
 	public void removeTest() throws Exception{
-		String url = ROOT_MAP+"/delete/"+r.getId();
-		Mockito.when(reservationService.delete(r.getId())).thenReturn(r);
+		String url = ROOT_MAP+"/delete/"+reservation.getId();
+		Mockito.when(reservationService.delete(reservation.getId())).thenReturn(reservation);
 		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.delete(url);
 		
 		ResultActions results = mockMvc.perform(getRequest);

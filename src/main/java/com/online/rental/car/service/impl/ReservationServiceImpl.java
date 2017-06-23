@@ -4,9 +4,14 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.online.rental.car.dao.CarDao;
@@ -21,44 +26,70 @@ import com.online.rental.car.util.CarAppUtil;
 import com.online.rental.car.util.CarStatuType;
 
 @Service
-public class ReservationServiceImpl implements ReservationService{
-	
+public class ReservationServiceImpl implements ReservationService {
+
+	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
+
+	private static final Marker actionMarker = MarkerFactory.getMarker("ACTION");
+
 	@Value("${spring.mail.username}")
 	private String username;
-	
+
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	private ReservationDao reservationDao;
-	
+
 	@Autowired
 	private CarDao carDao;
-	
+
 	@Autowired
 	private EmailDao emailDao;
-	
+
 	/**
 	 * Save transaction and send an email for more information
+	 * @throws Exception 
 	 */
-	//TODO: Make an asynchronous email sender
+	// TODO: Make an asynchronous email sender
 	@Override
 	@Transactional
-	public Reservation save(Reservation reservation) {
+	public Reservation save(Reservation reservation) throws Exception {
+		reservation.setReserveNumber(CarAppUtil.generateReserveNumber());
+		Reservation oldTransaction = reservationDao.findByDriverLicenNumber(reservation.getDriverLicenNumber());
+		Reservation transaction = null;
+		if(null == oldTransaction){
+			transaction = reservationDao.save(reservation);
+			emailSent(transaction);
+			logger.debug(actionMarker,transaction.toString());
+			Car car = transaction.getCar();
+			car.setStatus(CarStatuType.RENT.getTranslatedStatus());
+			carDao.save(car);
+		}else{
+			throw new RuntimeException("Licence number duplicated");
+		}
+		
+		return transaction;
+	}
+
+	@Async
+	private void emailSent(Reservation reservation) throws Exception{
 		Email email = new Email(javaMailSender);
 		List<EmailContent> contents = emailDao.findAll();
-		EmailContent content = contents.get(0);
+		EmailContent content = (null == contents) ? new EmailContent() : contents.get(0);
+		StringBuilder message = new StringBuilder(content.getMessage());
+		message.append(" Reserved number for your Car :").append(reservation.getReserveNumber());
+		content.setMessage(message.toString());
+		content.setReceiver(reservation.getEmail());
 		email.send(content);
-		reservation.setReserveNumber(CarAppUtil.generateReserveNumber());
-		return reservationDao.save(reservation);
 	}
-	
+
 	@Override
 	@Transactional
-	public Reservation update(Reservation reservation) {	
+	public Reservation update(Reservation reservation) {
 		return reservationDao.save(reservation);
 	}
-	
+
 	@Override
 	@Transactional
 	public Reservation delete(Long id) {
@@ -75,7 +106,7 @@ public class ReservationServiceImpl implements ReservationService{
 
 	@Override
 	@Transactional
-	public Car updateCarStatus(Long reservationId,CarStatuType type) {
+	public Car updateCarStatus(Long reservationId, CarStatuType type) {
 		Reservation reserve = reservationDao.findOne(reservationId);
 		Car car = reserve.getCar();
 		car.setStatus(type.toString());

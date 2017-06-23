@@ -2,7 +2,6 @@ package com.online.rental.car.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,7 +10,6 @@ import javax.persistence.Table;
 public class EmailContent {
 	
 	@Id
-    @GeneratedValue
     @Column(name = "id")
 	private Long id;
 	
@@ -20,6 +18,7 @@ public class EmailContent {
 	
 	@Column(name = "subject")
 	private String subject;
+	
 	
 	private String receiver;
 	

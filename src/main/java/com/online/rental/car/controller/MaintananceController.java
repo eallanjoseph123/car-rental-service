@@ -26,7 +26,7 @@ public class MaintananceController {
 	
 	@PostMapping(value = "/addCar",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	public Car addCar(@Valid @RequestBody Car car) {
+	public Car addCar(@Valid @RequestBody Car car) throws Exception {
 		return  maintananceService.save(car);
 	}
 	

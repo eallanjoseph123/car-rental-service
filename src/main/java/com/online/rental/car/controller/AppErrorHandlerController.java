@@ -11,13 +11,13 @@ import com.online.rental.car.model.ValidationError;
 import com.online.rental.car.model.ValidationErrorBuilder;
 /**
  * To handle any exception or error that will be occured in application.
- * @author aje
+ * @author 
  *
  */
-@ControllerAdvice(basePackages = {"com.online.rental.car"} )
+@ControllerAdvice
 public class AppErrorHandlerController {
 	
-	@ExceptionHandler(value = {Exception.class,MethodArgumentNotValidException.class})
+	@ExceptionHandler(value = {Exception.class,RuntimeException.class,MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
 	public ValidationError handleException(MethodArgumentNotValidException exception) {

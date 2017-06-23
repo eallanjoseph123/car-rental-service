@@ -18,16 +18,16 @@ public class Reservation {
 	
 	
 	@Id
-    @GeneratedValue
+	@GeneratedValue
     @Column(name = "RESERVE_ID")
 	private Long id;
 	
 	@NotBlank(message = "must not be blank")
-	@Column(name = "pickUpDate", unique = true)
+	@Column(name = "pickUpDate")
 	private String pickUpDate;
 	
 	@NotBlank(message = "must not be blank")
-	@Column(name = "returnDate", unique = true)
+	@Column(name = "returnDate")
 	private String returnDate;
 	
 
@@ -54,11 +54,31 @@ public class Reservation {
     @Column(name = "totalPrice")
     private String totalPrice;
     
-    @Column(name = "reserveNumber", unique = true)
+    @Column(name = "reserveNumber")
     private String reserveNumber;
     
+    @NotBlank(message = "must not be blank")
+    @Column(name = "email")
+    private String email;
+    
 	public long getId() {
+		id =  (id == null) ? 0 : id;
 		return id;
+	}
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setId(long id) {
@@ -121,8 +141,12 @@ public class Reservation {
 		this.car = car;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id + ", pickUpDate=" + pickUpDate + ", returnDate=" + returnDate + ", car=" + car
+				+ ", driverLicenNumber=" + driverLicenNumber + ", ageOfDriver=" + ageOfDriver + ", totalPrice="
+				+ totalPrice + ", reserveNumber=" + reserveNumber + "]";
 	}
-
+	
+	
 }

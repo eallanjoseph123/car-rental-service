@@ -4,7 +4,5 @@
     
     function reserveController(){
     	var vm = this;
-    	
-    	
 	}
 })();

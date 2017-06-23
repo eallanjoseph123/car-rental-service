@@ -32,7 +32,7 @@ public class ReservationController {
 
 	@PostMapping(value = "/addReservation",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(value = HttpStatus.OK)
-	public Reservation addReservation(@Valid @RequestBody Reservation reservation) throws Exception {
+	public Object addReservation(@Valid @RequestBody Reservation reservation) throws Exception {
 		Reservation response = reservationService.save(reservation);
 		if(response == null){
 		   throw new Exception("reservation was not save");

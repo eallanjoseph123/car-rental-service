@@ -7,8 +7,6 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 
 
 public class Email {
-	//TODO: Add logger
-	
 	private JavaMailSender javaMailSender;
 
 	public Email(JavaMailSender javaMailSender) {
@@ -17,7 +15,7 @@ public class Email {
 
 	public void send(final EmailContent content) throws MailException {
 		validateContent(content);
-		MimeMessagePreparator messagePreparator = mimeMessage -> {
+			MimeMessagePreparator messagePreparator = mimeMessage -> {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
 			
 			messageHelper.setFrom(content.getSender());
@@ -29,14 +27,12 @@ public class Email {
 		javaMailSender.send(messagePreparator);
 
 	}
-	
-	public void validateContent(EmailContent content){
+	//TODO: Make a new validation for this function
+	public void validateContent(EmailContent content) throws RuntimeException{
 		if(content == null || content.getMessage().isEmpty() || content.getReceiver().isEmpty() || content.getSender().isEmpty()){
-			try {
-				throw new Exception();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
+				throw new RuntimeException("Email Content has error");
+			
 		}
 	}
 }

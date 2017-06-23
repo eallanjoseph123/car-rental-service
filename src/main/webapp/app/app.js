@@ -3,7 +3,8 @@
         angular.module('car-app',
         [ 'car-app.router',
           'car-app.services',
-          'car-app.controller'
+          'car-app.controller',
+	      'car-app.directives'
         ]).
         
         

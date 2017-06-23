@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 
 public class ValidationError {
+	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<String> errors = new ArrayList<String>();
 
