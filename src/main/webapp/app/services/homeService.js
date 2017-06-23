@@ -4,7 +4,7 @@
 		   .factory('homeService',homeService);
 			homeService.$inject = ['$http','$q','$window'];
 	
-	function homeService($http,$q,window){
+	    function homeService($http,$q,window){
 		var service = {
 				fetchAvailableCars:fetchAvailableCars
 		};

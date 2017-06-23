@@ -44,12 +44,6 @@ public class Reservation {
     @Column(name = "ageOfDriver")
 	private int ageOfDriver;
     
-    /**
-     * Computation of this price will be on frontEnd using angularJS
-     * 
-     * Formula
-     * Days * carPrice
-     */
     @NotBlank(message = "must not be blank")
     @Column(name = "totalPrice")
     private String totalPrice;
@@ -66,8 +60,6 @@ public class Reservation {
 		return id;
 	}
 	
-	
-
 	public String getEmail() {
 		return email;
 	}
