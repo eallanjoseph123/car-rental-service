@@ -1,79 +1,45 @@
 <div>
 		<div id="" class="list-group">
 				<div class="col-md-7">
-						<div class="col-md-7">
-							<div class="row">
-								<a href="#"> <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt=""></a>
-							</div>
-							<div class="row">
-								<div id="Carousel" class="carousel slide">
-										<ol class="carousel-indicators">
-										    <li data-target="Carousel" ng-repeat="car in reserve.cars" data-slide-to="{{$index}}"></li>
-										   <!--  <li data-target="Carousel" data-slide-to="1"></li>
-										    <li data-target="Carousel" data-slide-to="2"></li> -->
-										</ol>
-										<div class="carousel-inner">
-										    <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										      <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										      <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										      <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										      <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										      <div class="item active" >
-										       <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.car.image}}" alt="">
-										    </div>
-										</div>
-										<span class="left carousel-control" data-target="#Carousel" data-slide="prev">
-										    <span class="glyphicon glyphicon-chevron-left"></span>
-										</span>
-										<span class="right carousel-control" data-target="#Carousel" data-slide="next">
-										   <span class="glyphicon glyphicon-chevron-right"></span>
-										</span>
-										</div>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<h3>{{reserve.car.brand}}</h3>
-							<h4>{{reserve.car.perDayPrice | currency}}</h4>
-							<p>{{reserve.car.type}}</p>
-						</div>
+					
+					<selected-car></selected-car>
+					
 				</div>				
 				<div class="col-md-5">
-					 <form class="well form-horizontal" action="#" method="post"  id="contact_form">
-					 <div class="row">
-			            <div class="form-group col-lg-12">
-			               <input type="text" class="form-control input-sm" id="name" name="name" placeholder="Name" required>
-			            </div>
-       				 </div>
-
-				        <div class="row">
-				            <div class="form-group col-lg-12 ">
-				               <input type="text" class="form-control input-sm" id="email" name="email" placeholder="Email" required>
+					 <form class="well form-horizontal"  method="post"  id="reserveForm" name="reserveForm"
+					 ng-submit="reserveForm.$valid && reserve.checkOut(reserve.item)" novalidate >
+						 <div class="row">
+				            <div class="form-group col-lg-12">
+				               <input type="text" class="form-control input-sm" id="name"
+				                ng-model="reserve.item.name" name="name" placeholder="Name" required>
+				         
 				            </div>
-				        </div>
-	    				 <div class="row">
-							<div class="form-group col-lg-12">
-								<input type="text" class="form-control input-sm" id="mobile" name="mobile" placeholder="Mobile Number" required>
+	       				 </div>
+	       				
+					         <div class="row">
+					            <div class="form-group col-lg-12 ">
+					               <input type="email" class="form-control input-sm" 
+					               ng-model="reserve.item.email" id="email" name="email" placeholder="Email" required>
+					            </div>
+					        </div>
+		    				 <div class="row">
+								<div class="form-group col-lg-12">
+									<input type="number"
+									 ng-model="reserve.item.mobileNumber"
+									 class="form-control input-sm" id="mobile" name="mobile" placeholder="Mobile Number" required>
+								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-lg-12">
-								<input type="text" class="form-control input-sm" id="age" name="age" placeholder="Age of Driver" required>
+							<div class="row">
+								<div class="form-group col-lg-12">
+									<input  type="number" pattern="\d*" min="20" maxlength="2"
+									 ng-model="reserve.item.ageOfDriver"  class="form-control input-sm" id="age" name="age" placeholder="Age of Driver" required>
+								</div>
 							</div>
-						</div>
 					
 						<div class="row">
 							<div class="form-group col-lg-12">
-								<input type="text" class="form-control input-sm" id="driver-licence" name="driver-licence" placeholder="Driver Licence Number" required>
+								<input type="text" class="form-control input-sm" id="driver-licence" 
+								ng-model="reserve.item.driverLicenNumber" name="driver-licence" placeholder="Driver Licence Number" required>
 							</div>
 						</div>
 						
@@ -82,37 +48,36 @@
 								<div class="col-md-6">
 											<div class="input-group date">
 												<input type="text" class="form-control" date-picker=""
-												 ng-model="startDate" placeholder="Pick Up Date" />
+												 ng-model="reserve.item.pickUpDate" name="pickUpDate" placeholder="Pick Up Date" required/>
 												 <div class="input-group-addon">
 											        <span class="glyphicon glyphicon-th"></span>
 							   				 	</div>
 						    				 </div>
 								</div>
-								<div class="col-md-6">
+							 <div class="col-md-6">
 										<div class="input-group date">
-												<input type="text" class="form-control" date-picker
-												 ng-model="startDate" placeholder="Return Date" />
+												<input type="text" class="form-control" date-picker=""
+												 ng-model="reserve.item.returnDate" name="returnDate" placeholder="Return Date" required/>
 												 <div class="input-group-addon">
 											        <span class="glyphicon glyphicon-th"></span>
 							   				 	</div>
 						    				 </div>
-								</div>
+								       </div>
 							</div>
 							
 						</div>
-						
 						<div class="form-group">
-							<div class="list-group">
 							   <div  class="col-md-6">
-								   <h3>TOTAL PRICE</h3> 
+								  <b>TOTAL PRICE:</b>
 							   </div>
-							   <div  class="col-md-6">
-								   <h3>{{25}}</h3> 
-							   </div>
+							   <div class="col-md-6">
+							       <input type="hidden" id="totalPrice" name="totalPrice" model="reserve.item.totalPrice" />
+								    <h3>{{reserve.item.totalPrice | currency}}</h3> 
 							   </div>
 						</div>
-            			<div class="form-group">
-        					<button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
+            			 <div class="form-group">
+        					<input type="submit" id="submit" name="submit"
+        					class="btn btn-primary btn-lg btn-block" value="submit" ng-disabled="!reserveForm.$valid">
         				</div>
         			</form>
 				</div>

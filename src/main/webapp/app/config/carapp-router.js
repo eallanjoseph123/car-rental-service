@@ -4,13 +4,13 @@
 
         app.config(function($stateProvider, $urlRouterProvider,$locationProvider) {
 
-            $urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/carApp');
 
             $stateProvider
             	.state('home', {
                     url: '/',
                     templateUrl: 'app/views/home.html',
-                    controller :  'homeCtrls as home'
+                    controller :  'homeCtrl as home'
                 })
             	.state('about', {
                     url: '/about',

@@ -19,6 +19,8 @@
     <!-- Bootstrap -->
     <link href="css/lib/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/image-slider.css" rel="stylesheet">
+    <link href="css/form-validation.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +35,7 @@
 	
   
   </head>
-  <body ng-controller="mainController">
+  <body ng-controller="mainController as mainCtrl">
   <header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -116,4 +118,5 @@
   <script src="app/services/reservationservice.js"></script>
   <script src="app/config/containerDirectives.js"></script>
   <script src="app/directives/datepicker.js"></script>
+  <script src="app/directives/selectedCar.js"></script>
 </html>

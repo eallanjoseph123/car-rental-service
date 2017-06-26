@@ -8,7 +8,8 @@
 		function reserveService(http,q,window){
 			var vm = this;
 			
-			vm.car = null;		    
+			vm.car = {};		    
+			
 			vm.cars = {};
 			
 			function setCars(cars){
@@ -20,10 +21,11 @@
 			}
 		    
 			
-			function setCar(car){
-		    	vm.car = car;
+			function setCar(car,index){
+		    	vm.car = {car:car,index,index};
 		    	
 			}
+			
 			function getCar(){
 				return vm.car;
 			}

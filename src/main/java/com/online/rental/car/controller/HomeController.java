@@ -1,5 +1,6 @@
 package com.online.rental.car.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,8 +39,10 @@ public class HomeController {
 		CarAppResponse<HomeView> response = homeService.getAvailableCars();
 		HomeView homeView= response.getPayLoad();
 		response.setResponse(homeView);
+		List<Car> cars =homeView.getCars();
+		Collections.sort(cars);
 		logger.debug(actionMarker,"view all cars {}",homeView.getCars());
-		return homeView.getCars();
+		return cars;
 	}
 	
 	

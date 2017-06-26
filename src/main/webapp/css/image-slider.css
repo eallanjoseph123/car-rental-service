@@ -1,0 +1,13 @@
+.img_slides{
+  margin:auto;
+  width: 400px;
+}
+.slides_control {
+  position:absolute;
+  width: 250px;
+  left:50%;
+  margin-left:-100px; 
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+}

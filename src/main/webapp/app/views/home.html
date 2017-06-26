@@ -1,17 +1,19 @@
 <div id="cars-information">
 	<table ng-table="home.customConfigParams">
-	    <tr ng-repeat="row in $data">
-	          <td>
+	
+	    <tr ng-repeat="row in $data track by row.id">
+	    
+	          <td> 
 			         <div class="col-md-7">
 					<a href="#"> <img class="img-responsive" ng-src="data:image/JPEG;base64,{{row.image}}" alt=""></a>
 					</div>
 	          </td>
 	          <td >
-			          <div class="col-md-5">
+	          	 <div class="col-md-5">
 						<h3>{{row.brand}}</h3>
 						<h4>{{row.perDayPrice | currency}}</h4>
 						<p>{{row.type}}</p>
-						<a class="btn btn-primary" ui-sref="reserve" ng-click="home.addCar(row)">{{row.status | uppercase}}<span class="glyphicon glyphicon-chevron-right"></span></a>
+						<a class="btn btn-primary" ui-sref="reserve" ng-click="home.addCar(row,$index)">{{row.status | uppercase}}<span class="glyphicon glyphicon-chevron-right"></span></a>
 				   	</div>
 	          </td>
 	        </tr>

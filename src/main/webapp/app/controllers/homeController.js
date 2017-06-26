@@ -1,12 +1,13 @@
 (function () {
 	 "use strict";
-    angular.module("carApp.homeCtrl",['ui.bootstrap','ngTable']).controller('homeCtrls',homeController);
+    angular.module("carApp.homeCtrl",['ui.bootstrap','ngTable']).controller('homeCtrl',homeController);
     homeController.$inject = ['$scope','$log','homeService','NgTableParams','$window','reserveService'];
     function homeController($scope,log,homeService,NgTableParams,window,reserveService){
     	var vm = this;
     	
-    	vm.addCar = function(car){
-    		reserveService.addCar(car);
+    	vm.index = 0;
+    	vm.addCar = function(car,index){
+    		reserveService.addCar(car,index);
     	};
     	
     	 homeService.fetchAvailableCars().then(
@@ -20,7 +21,7 @@
          		
      	 );
         function createUsingFullOptions(data) {
-          var initialParams = {count:5};
+          var initialParams = {count:3};
           var initialSettings = {
             counts: [],
             paginationMaxBlocks: 13,

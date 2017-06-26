@@ -3,21 +3,46 @@
      directive('datePicker', datePicker);
 
 		  function datePicker() {
-		    var picker = {
+		    var result = {
 		    		restrict :'AE',
-		    		link : date,
-		    		replace: false
+		    		link : createDatePicker,
+		    		replace: false,
+		    		require: 'ngModel',
+		    	    scope:{
+		    	    	reserve:'='
+		    	    }
 		    };
-		    function date(scope, el, attr) {
+		    function createDatePicker(scope, el, attr,ngModel) {
+		     var value = null;
+		     $(el).attr("readonly",""); 
 		      $(el).datepicker({
-		    	    minDate: new Date(),
+		    	  maxDate: "1w",
+		    	   minDate: new Date(),
 		    	   defaultDate: 1, 
 		           onSelect: function(dateText) {
-		          console.log(dateText);
+		        	   scope.$apply(function() {
+		        		   var pickUpDate = scope.$parent.reserveForm.pickUpDate.$viewValue;
+		        		   if(pickUpDate !== dateText){
+		        			   ngModel.$setViewValue(dateText);
+		        			   var returnDate = scope.$parent.reserveForm.returnDate.$viewValue;
+		        			   if(pickUpDate !== undefined && returnDate !== undefined){
+		        				   var pickUpDate = new Date(pickUpDate);
+		        				   var returnDate = new Date(returnDate);
+		        				   var diffDays = parseInt((returnDate - pickUpDate) / (1000 * 60 * 60 * 24)); 		
+		        				   var totalPrice = diffDays * scope.$parent.reserve.objectCar.car.perDayPrice;
+		        				   scope.$parent.reserve.item['totalPrice']=totalPrice;
+		        				   scope.$parent.reserve.item['car']=scope.$parent.reserve.objectCar.car;
+			        		   }
+		        		   }else{
+		        			   ngModel.$setViewValue(null);
+			        		   console.log("return date must not be equal to pick up date");
+			        		}
+		                 });
 		        }
 		      });
-		    $(el).attr( "readonly","" ); 
+		      
+		   
 		    }
-		 return picker;
+		 return result;
 	}
 })();

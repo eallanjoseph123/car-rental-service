@@ -1,13 +1,27 @@
 (function () {
-    angular.module("carApp.reserveCtrl",[]).	
+    angular.module("carApp.reserveCtrl",['ui.bootstrap']).	
     		controller('reserveCtrl',reserveController);
-    reserveController.$inject = ['reserveService','$log'];
-    function reserveController(reserveService,log){
+    
+    reserveController.$inject = ['$scope','reserveService','$log'];
+    
+    function reserveController($scope,reserveService,log){
     	var vm = this;
-    	vm.car = reserveService.getCar();
+    	vm.objectCar = reserveService.getCar();
+    	vm.item = vm.item  || [];
     	vm.cars = reserveService.getCars();
     	vm.counts = vm.cars.length;
-    	log.info("reservation ctrl car data ",vm.car);
-    	log.info("reservation ctrl cars ",vm.cars);
+    	
+    	var curentIndex = vm.objectCar.index;
+    	
+    	vm.slider = {
+    		active: 0,  
+    		interval: 5000,
+    		enableSlide:false
+    	};
+    	
+    	vm.checkOut = function(item){
+    		log.info("item ",item);
+    	};
+    	
 	}
 })();

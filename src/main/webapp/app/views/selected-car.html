@@ -1,0 +1,23 @@
+<div class="col-md-7">
+	<div class="row">
+		<a href="#"> <img class="img-responsive" ng-src="data:image/JPEG;base64,{{reserve.objectCar.car.image}}" alt=""></a>
+	</div>
+	<div class="row">
+		<div class="slides_control">
+			 <div uib-carousel active="reserve.slider.active" interval="reserve.slider.interval" no-wrap="reserve.slider.enableSlide">
+			      <div uib-slide ng-repeat="car in reserve.cars track by car.id" index="$index">
+			        <img class="img-responsive img_slides" ng-src="data:image/JPEG;base64,{{car.image}}">
+			        <div class="carousel-caption">
+			          <h4>{{car.brand}}</h4>
+			          <p>{{car.type}}</p>
+			        </div>
+			      </div>
+			  </div>
+		</div>
+	</div>
+</div>
+<div class="col-md-5">
+	<h3>{{reserve.objectCar.car.brand}}</h3>
+	<h4>{{reserve.objectCar.car.perDayPrice | currency}}</h4>
+	<p>{{reserve.objectCar.car.type}}</p>
+</div>

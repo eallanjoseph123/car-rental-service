@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Car", schema = "rental")
-public class Car implements Serializable{
+public class Car implements Serializable,Comparable<Car>{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -176,4 +176,11 @@ public class Car implements Serializable{
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	@Override
+	public int compareTo(Car o) {
+		return Long.valueOf(getId()).compareTo(o.getId());
+	}
+	
+	
 }
