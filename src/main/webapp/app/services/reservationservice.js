@@ -29,12 +29,35 @@
 			function getCar(){
 				return vm.car;
 			}
+			
+			function addReservation(item){
+		     var data = Object.assign({}, item);
+		     console.log("date ",data);
+			 var response = http({
+	                method: 'POST',
+	                url:window.baseUrl+'reserve/addReservation',
+	                data: data,
+	                headers: {
+	                    'Content-Type': 'application/json'
+	                }
+	            }).then(
+	                function(response) {
+	                    return response.data;
+	                }, 
+	                function(errResponse) {
+	                    console.error('Error !!');
+	                    return $q.reject(errResponse);
+	                });
+				
+				return response;
+			}
 		    
 		    var service = {
 		    		addCar:setCar,
 		    		getCar:getCar,
 		    		addCars:setCars,
-		    		getCars:getCars
+		    		getCars:getCars,
+		    		addReservation:addReservation
 		    };
 		    
 		   return service;
