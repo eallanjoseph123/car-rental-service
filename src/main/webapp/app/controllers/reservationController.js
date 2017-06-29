@@ -1,4 +1,6 @@
 (function () {
+	 "use strict";
+	 
     angular.module("carApp.reserveCtrl",['ui.bootstrap']).	
     		controller('reserveCtrl',reserveController);
     
@@ -21,6 +23,8 @@
     	
     	vm.checkOut = function(item){
     		log.info("item ",item);
+    		var response = reserveService.addReservation(item);
+    		log.info("response ",response);
     	};
     	
 	}
