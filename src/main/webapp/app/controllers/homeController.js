@@ -5,7 +5,9 @@
     function homeController($scope,log,homeService,NgTableParams,window,reserveService){
     	var vm = this;
     	
+    	console.log("$scope ",$scope);
     	vm.index = 0;
+    	
     	vm.addCar = function(car,index){
     		reserveService.addCar(car,index);
     	};
@@ -18,6 +20,7 @@
          		},function(error) {
      				log.error(error);
          		}
+         		
          		
      	 );
         function createUsingFullOptions(data) {

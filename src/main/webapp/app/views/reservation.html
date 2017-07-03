@@ -72,12 +72,31 @@
 							   </div>
 							   <div class="col-md-6">
 							       <input type="hidden" id="totalPrice" name="totalPrice" model="reserve.item.totalPrice" />
-								    <h3>{{reserve.item.totalPrice | currency}}</h3> 
+								    <h3>{{reserve.item.totalPrice | currency}}</h3>     
+								    
 							   </div>
 						</div>
             			 <div class="form-group">
-        					<input type="submit" id="submit" name="submit"
-        					class="btn btn-primary btn-lg btn-block" value="submit" ng-disabled="!reserveForm.$valid">
+            			  
+            			  <car-modal modal-name="modal1" 
+            			  			modal-body="reserve.modalBody" 
+            			  			modal-footer="mainCtrl.modalApp.footer" 
+        				 			 modal-header="mainCtrl.modalApp.header" 
+        				 			 data-ng-click-left-button= "reserve.myRightButton()"
+        				 			 data-ng-click-right-button="reserve.myRightButton()">
+        				 </car-modal>
+        				  
+        					<input 
+        						type="submit"
+        						id="submit"
+        						name="submit"
+        						class="btn btn-primary btn-lg btn-block" 
+        						value="submit" 
+        						ng-disabled="!reserveForm.$valid" 
+        						data-toggle="modal" 
+        						ng-href="#{{modal1}}"> 
+        						<!-- <a href="#{{modal1}}" class="btn btn-primary btn-lg btn-block" 	data-toggle="modal" >test</a> -->
+   
         				</div>
         			</form>
 				</div>

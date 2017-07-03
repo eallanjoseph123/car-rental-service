@@ -3,6 +3,6 @@
     	[	'carApp.homeCtrl',
     		'carApp.aboutCtrl',
     		'carApp.reserveCtrl',
-    		'carApp.maintainanceCtrl'
+    		'carApp.maintenanceCtrl'
     	]);
 })();

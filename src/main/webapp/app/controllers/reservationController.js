@@ -4,9 +4,9 @@
     angular.module("carApp.reserveCtrl",['ui.bootstrap']).	
     		controller('reserveCtrl',reserveController);
     
-    reserveController.$inject = ['$scope','reserveService','$log'];
+    reserveController.$inject = ['$scope','reserveService','$log','$window'];
     
-    function reserveController($scope,reserveService,log){
+    function reserveController($scope,reserveService,log,$window){
     	var vm = this;
     	vm.objectCar = reserveService.getCar();
     	vm.item = vm.item  || [];
@@ -23,9 +23,22 @@
     	
     	vm.checkOut = function(item){
     		log.info("item ",item);
-    		var response = reserveService.addReservation(item);
-    		log.info("response ",response);
+    		reserveService.addReservation(item).then(succes,error);
     	};
+    	
+    	
+    	vm.myRightButton = function(){
+    		$window.location.href = $window.baseUrl;
+    	}
+    	
+    	function succes(data){
+    		log.info("[success] response after adding reservation",data);
+    		vm.modalBody = 'Success you will be received an email for your reservation '+ data.reserveNumber ;
+    	}
+    	
+    	function error(data){
+    		log.info("[error] response after adding reservation",data);
+    	}
     	
 	}
 })();

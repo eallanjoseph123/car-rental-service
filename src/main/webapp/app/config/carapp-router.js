@@ -24,7 +24,7 @@
                 }).state('login', {
                     url: '/login',
                     templateUrl: 'app/views/maintanance.html',
-                    controller :  'maintainanceCtrl as maintain'
+                    controller :  'maintenanceCtrl as maintain'
                 });            
             //for removable of # in url
             $locationProvider.html5Mode(true);

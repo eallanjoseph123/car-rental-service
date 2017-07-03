@@ -32,8 +32,8 @@
 			
 			function addReservation(item){
 		     var data = Object.assign({}, item);
-		     console.log("date ",data);
-			 var response = http({
+		     
+		     var response = http({
 	                method: 'POST',
 	                url:window.baseUrl+'reserve/addReservation',
 	                data: data,

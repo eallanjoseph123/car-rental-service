@@ -1,6 +1,7 @@
 (function () {
     angular.module("car-app.directives",
     	[	'carapp.datePicker',
-    	 	'carapp.selectedCar'
+    	 	'carapp.selectedCar',
+    	 	'carapp-modal'
     	]);
 })();

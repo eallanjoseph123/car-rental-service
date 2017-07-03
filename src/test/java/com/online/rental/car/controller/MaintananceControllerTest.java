@@ -116,7 +116,7 @@ public class MaintananceControllerTest {
 		
 		String jsonCar = utilGson.toJson(car);
 		
-		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.put(url);
 		getRequest.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		getRequest.content(jsonCar);
 		ResultActions results = mockMvc.perform(getRequest);
@@ -148,7 +148,7 @@ public class MaintananceControllerTest {
 		
 		Mockito.when(maintananceService.delete(idCar)).thenReturn(car);
 		
-		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.delete(url);
 		getRequest.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 		ResultActions results = mockMvc.perform(getRequest);
 		
@@ -177,7 +177,7 @@ public class MaintananceControllerTest {
 
 		Mockito.when(maintananceService.getAll()).thenReturn(cars);
 
-		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get(url);
 		getRequest.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
 		ResultActions results = mockMvc.perform(getRequest);

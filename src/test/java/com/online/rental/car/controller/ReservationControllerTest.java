@@ -159,7 +159,7 @@ public class ReservationControllerTest {
 		value.add(reservation2);
 		Mockito.when(reservationService.getAll()).thenReturn(value);
 		
-		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.post(url);
+		MockHttpServletRequestBuilder getRequest = MockMvcRequestBuilders.get(url);
 		ResultActions results = mockMvc.perform(getRequest);
 		results.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
 		results.andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)));

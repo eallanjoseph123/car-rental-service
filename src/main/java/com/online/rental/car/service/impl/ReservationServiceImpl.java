@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -31,9 +30,6 @@ public class ReservationServiceImpl implements ReservationService {
 	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
 	private static final Marker actionMarker = MarkerFactory.getMarker("ACTION");
-
-	@Value("${spring.mail.username}")
-	private String username;
 
 	@Autowired
 	private JavaMailSender javaMailSender;
@@ -58,15 +54,20 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setReserveNumber(CarAppUtil.generateReserveNumber());
 		Reservation oldTransaction = reservationDao.findByDriverLicenNumber(reservation.getDriverLicenNumber());
 		Reservation transaction = null;
-		if(null == oldTransaction){
+		try{
+			if(null == oldTransaction){
+				emailSent(transaction);
+			}else{
+				throw new RuntimeException("Licence number duplicated");
+			}
+		}catch(Exception e){
+			//TODO: Make a handler for exception email either save or re-send it
+		}finally{
 			transaction = reservationDao.save(reservation);
-			emailSent(transaction);
-			logger.debug(actionMarker,transaction.toString());
 			Car car = transaction.getCar();
 			car.setStatus(CarStatuType.RENT.getTranslatedStatus());
 			carDao.save(car);
-		}else{
-			throw new RuntimeException("Licence number duplicated");
+			logger.debug(actionMarker,transaction.toString());
 		}
 		
 		return transaction;
