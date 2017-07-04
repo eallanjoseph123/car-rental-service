@@ -30,6 +30,9 @@ public class Reservation {
 	@Column(name = "returnDate")
 	private String returnDate;
 	
+	@NotBlank(message = "must not be blank")
+	@Column(name = "name")
+	private String name;
 
 	@NotNull(message = "must not be blank")
 	@OneToOne
@@ -55,6 +58,16 @@ public class Reservation {
     @Column(name = "email")
     private String email;
     
+    
+    
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public long getId() {
 		id =  (id == null) ? 0 : id;
 		return id;

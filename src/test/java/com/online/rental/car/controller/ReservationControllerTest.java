@@ -83,6 +83,7 @@ public class ReservationControllerTest {
 		reservation.setTotalPrice("20.00");
 		reservation.setId(11L);
 		reservation.setEmail("email@yahoo.com");
+		reservation.setName("allan");
 		
 		reservation2 = new Reservation();
 		reservation.setAgeOfDriver(25);

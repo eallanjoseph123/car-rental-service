@@ -1,0 +1,23 @@
+<div>
+	<div>
+		<h2>Customer Information:</h2>
+	</div>
+	<table ng-table="maintain.customConfigParams" class="table table-bordered table-striped">
+	<th>Name</th>
+	<th>Car-Plate-Number</th>
+	<th>Reserved-Number</th>
+	<th>Pick-Up-Date</th>
+	<th>Return-Date</th>
+	<th>Licence-Number</th>
+	<th>Rental-Fee</th>
+		 <tr ng-repeat="row in $data track by row.id">
+		 <td>{{row.name}}</td>
+		 <td>{{row.car.plateNumber}}</td>
+		 <td>{{row.reserveNumber}}</td>
+		 <td>{{row.pickUpDate}}</td>
+		 <td>{{row.returnDate}}</td>
+		 <td>{{row.driverLicenNumber}}</td>
+		 <td>{{row.totalPrice}}</td>
+		 </tr>
+	</table>
+</div>

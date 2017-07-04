@@ -1,7 +1,9 @@
 (function () {
 	 "use strict";
     angular.module("carApp.homeCtrl",['ui.bootstrap','ngTable']).controller('homeCtrl',homeController);
+    
     homeController.$inject = ['$scope','$log','homeService','NgTableParams','$window','reserveService'];
+    
     function homeController($scope,log,homeService,NgTableParams,window,reserveService){
     	var vm = this;
     	
