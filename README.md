@@ -2,7 +2,7 @@
 
 This is a Car rental online Web application. Its a small application and its SPA using latest (recently) frontEnd UI ANGULARJS. 
 
-Application Status: Still working (Im just doing this if i have a enough time :) ).
+Application Status: Still working (Im just doing this if i have a free time :) ).
 
 # Progress UI:
 
