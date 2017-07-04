@@ -1,7 +1,7 @@
 (function () {
 	 "use strict";
 	 
-    angular.module("carApp.reserveCtrl",['ui.bootstrap']).	
+    angular.module("car-app.controller").	
     		controller('reserveCtrl',reserveController);
     
     reserveController.$inject = ['$scope','reserveService','$log','$window'];

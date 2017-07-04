@@ -1,6 +1,6 @@
 (function(){
 	 "use strict";
-	  angular.module('carapp.selectedCar',[]).
+	  angular.module('car-app.directives').
 	     directive('selectedCar', selectedCar);
 	  
 		  function selectedCar(){

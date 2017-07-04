@@ -1,5 +1,6 @@
 (function(){
-   angular.module('carapp.datePicker',[]).
+	 "use strict";
+   angular.module('car-app.directives').
      directive('datePicker', datePicker);
 
 		  function datePicker() {

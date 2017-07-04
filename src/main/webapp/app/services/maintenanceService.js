@@ -1,7 +1,6 @@
 (function (){
 	 "use strict";
-	 
-	 angular.module('carApp.maintenanceService',[]).service('maintenanceService',maintenanceService);
+	 angular.module('car-app.services').service('maintenanceService',maintenanceService);
 	 
 	 maintenanceService.$inject = ['$http','$q','$window'];
 	 

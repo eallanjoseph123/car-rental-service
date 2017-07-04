@@ -1,7 +1,7 @@
 (function (){
 	 "use strict";
 	 
-	 angular.module('carApp.maintenanceCtrl',['ui.bootstrap','ngTable']).controller('maintenanceCtrl',maintainanceCtrl);
+	 angular.module('car-app.controller').controller('maintenanceCtrl',maintainanceCtrl);
 	 
 	 maintainanceCtrl.$inject = ['$scope','$log','maintenanceService','NgTableParams'];
 	 

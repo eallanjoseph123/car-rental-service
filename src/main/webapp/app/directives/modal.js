@@ -1,6 +1,6 @@
 (function(){
 	 "use strict";
-	angular.module('carapp-modal',[]).directive('carModal',carModal);
+	angular.module('car-app.directives').directive('carModal',carModal);
 	
 	function carModal(){
 		  var result =  {

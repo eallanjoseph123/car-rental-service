@@ -1,12 +1,9 @@
 (function () {
 	 "use strict";
+	 angular.module("car-app.controller").controller('aboutCtrl',aboutController);
 	 
-	  	angular.module("carApp.aboutCtrl",[]).	
-	  			controller('aboutCtrl',aboutController);
-	  
+	 function aboutController($scope){
 
-		function aboutController($scope){
-
-		}
+	 }
 
 })();

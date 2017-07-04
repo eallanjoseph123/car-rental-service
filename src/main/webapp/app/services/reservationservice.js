@@ -1,5 +1,6 @@
 (function (){
-	angular.module('carApp.reserveService',[]).
+	"use strict";
+	angular.module('car-app.services').
 			factory('reserveService',reserveService);
 		
 		reserveService.$inject = ['$http','$q','$window'];

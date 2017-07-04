@@ -1,6 +1,6 @@
 (function (){
 	 "use strict";
-	angular.module("carApp.homeService",[])
+	angular.module('car-app.services')
 		   .factory('homeService',homeService);
 			homeService.$inject = ['$http','$q','$window'];
 	
