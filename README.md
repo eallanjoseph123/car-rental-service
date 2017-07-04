@@ -1,34 +1,20 @@
 # Online Reservation Car.
 
-Some user stories (functionalities) are still working. 
+This is a Car rental online Web application. Its a small application and its SPA using latest (recently) frontEnd UI ANGULARJS. 
 
-Label 
-(*)  = currently working
-(#) = done
-=================================================
+Application Status: Still working (Im just doing this if i have a enough time :) ).
 
-Info: 
+# Progress:
 
-Client -
-1. Can be reserved a car      *
-2. Can view all available cars   #    
-3. Can receive Email transaction  #
+1. Home Page:
+
+2. Customer Reservation Form
 
 
-Employee -
-1. Can view all cars       #
-2. Can add Cars             #
-3. Can CRUD (Delete,update etc...) #
-4. Can reserve customer car     *
-5.
-
-Application
-1. Auto Email the client once the due date or return date will be (To be implemented) due. *
+3. Customer Info.
 
 
-=================================================
-
-Technology use:
+# Technology use:
 
 Front End
 1.AngularJs 1.X version
