@@ -27,9 +27,7 @@
 		        			   ngModel.$setViewValue(dateText);
 		        			   var returnDate = scope.$parent.reserveForm.returnDate.$viewValue;
 		        			   if(pickUpDate !== undefined && returnDate !== undefined){
-		        				   var pickUpDate = new Date(pickUpDate);
-		        				   var returnDate = new Date(returnDate);
-		        				   var diffDays = parseInt((returnDate - pickUpDate) / (1000 * 60 * 60 * 24)); 		
+		        				   var diffDays = carUtil.calculateDateDifference(pickUpDate,returnDate); 		
 		        				   var totalPrice = diffDays * scope.$parent.reserve.objectCar.car.perDayPrice;
 		        				   scope.$parent.reserve.item['totalPrice']=totalPrice;
 		        				   scope.$parent.reserve.item['car']=scope.$parent.reserve.objectCar.car;
