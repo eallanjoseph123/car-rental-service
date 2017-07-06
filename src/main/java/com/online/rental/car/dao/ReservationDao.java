@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.online.rental.car.model.Reservation;
 
 @Repository
-public interface ReservationDao extends JpaRepository<Reservation, Long>,JpaSpecificationExecutor<Reservation>{	
-	
+public interface ReservationDao extends JpaRepository<Reservation, Long>,JpaSpecificationExecutor<Reservation>{		
 	@Query("SELECT r FROM Reservation r WHERE r.driverLicenNumber = :driverLicenNumber")
 	public Reservation findByDriverLicenNumber(@Param("driverLicenNumber") String driverLicenNumber);
 }

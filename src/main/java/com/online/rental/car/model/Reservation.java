@@ -98,7 +98,8 @@ public class Reservation {
 		this.reserveNumber = reserveNumber;
 	}
 
-	public String getTotalPrice() {
+	public String getTotalPrice(){
+		
 		return totalPrice;
 	}
 
