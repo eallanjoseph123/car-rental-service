@@ -2,8 +2,6 @@
 ========================================
 
 source:
-1. https://www.martinfowler.com/bliki/AnemicDomainModel.html
-2.https://www.petrikainulainen.net/software-development/design/the-biggest-flaw-of-spring-web-applications/
 ========================================
 
 This is a Car rental online Web application. Its a small application and its SPA using latest (or recently) frontEnd UI ANGULARJS. 
