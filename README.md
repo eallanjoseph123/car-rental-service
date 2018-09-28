@@ -1,7 +1,5 @@
 # Online Reservation Car.
 ========================================
-Revamping. I discovered a wrong pattern or common anti pattern in web spring mvc app
-
 
 source:
 1. https://www.martinfowler.com/bliki/AnemicDomainModel.html
